@@ -274,7 +274,7 @@ const FaqPage = () => {
                                 <li>
                                     <a href="/savings">Savings</a>
                                 </li>
-                                <li><a href="checking.html">Checking</a></li>
+                                <li><a href="#">Checking</a></li>
                             </ul>
                         </div>
                     </div>

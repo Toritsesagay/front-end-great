@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { useDispatch } from 'react-redux';
 import { fetchAdmin } from '../store/action/userAppStorage';
-
+import NumberCounter from 'number-counter'
 
 
 const HomePage = () => {
@@ -11,10 +11,18 @@ const HomePage = () => {
     let [isShow, setIsShow] = useState(false)
     let [isAdminData, setIsAdminData] = useState({})
 
-    let load = async() => {
+
+
+    // Function to initialize the Odometer once the component mounts
+
+
+
+
+
+    let load = async () => {
         //fetch admin details
         let res = await dispatch(fetchAdmin())
-        if(!res.bool){
+        if (!res.bool) {
             return setIsLoading(false)
         }
         setIsAdminData(res.message)
@@ -33,8 +41,8 @@ const HomePage = () => {
     }
 
 
-   
-    
+
+
 
 
 
@@ -51,7 +59,7 @@ const HomePage = () => {
 
 
 
-       
+
 
 
 
@@ -297,30 +305,31 @@ const HomePage = () => {
                     <p>Explore stories about how we are helping customers succeed and communities thrive..</p>
                 </div>
 
+
+
+
                 <div class="row">
-
-
                     <div class="col-lg-4 col-sm-4 col-md-4 col-8">
                         <div class="funfact">
-                            <h3><span class="odometer" data-count="20">00</span>K</h3>
+                            <h3 style={{display:'flex',justifyContent:'center'}}><span class="odometer" data-count="20"><NumberCounter end={10000}   delay={2000}/></span>K</h3>
                             <p>Feedback</p>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-sm-4 col-md-4 col-8">
                         <div class="funfact">
-                            <h3><span class="odometer" data-count="500">00</span>+</h3>
+                        <h3 style={{display:'flex',justifyContent:'center'}}><span class="odometer" data-count="20"><NumberCounter end={2000}   delay={1000}/></span>+</h3>
                             <p>Workers</p>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-sm-4 col-md-4 col-8">
-                        <div class="funfact">
-                            <h3><span class="odometer" data-count="70">00</span>+</h3>
+                        <div class="funfact"> <h3 style={{display:'flex',justifyContent:'center'}}><span class="odometer" data-count="20"><NumberCounter end={500}   delay={2000}/></span>++</h3>
                             <p>Contrubutors</p>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="contact-cta-box">
                     <h3>Have any question about us?</h3>
@@ -363,7 +372,7 @@ const HomePage = () => {
                                 <li>
                                     <a href="/savings">Savings</a>
                                 </li>
-                                <li><a href="checking.html">Checking</a></li>
+                                <li><a href="#">Checking</a></li>
                             </ul>
                         </div>
                     </div>
