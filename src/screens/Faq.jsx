@@ -296,8 +296,8 @@ const FaqPage = () => {
                             <h3>Address</h3>
 
                             <ul className="footer-contact-info">
-                                <li><span>Location:</span>{isAdminData.location}</li>
-                                <li><span>Phone:</span> <a href="">{isAdminData.phone}</a></li>
+                            <li><span>Location:</span>27 Division St, NY 10002, USA</li>
+                                <li><span>Phone:</span> <a href="">+1 336 422-3500</a></li>
                             </ul>
                         </div>
                     </div>
