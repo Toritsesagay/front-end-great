@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './EmailVerify.module.css';
-import { checkverification} from "../store/action/userAppStorage";
+import { checkverification } from "../store/action/userAppStorage";
 import { useDispatch } from "react-redux";
 //importing modals
 import LoadingModal from "../components/Modal/LoadingModal";
@@ -18,6 +18,8 @@ function EmailVerify() {
     let [isErrorInfo, setIsErrorInfo] = useState('')
     let [isSignout, setIsSignout] = useState(false)
     let [preloader, setPreloader] = useState(true)
+    const [time, setTime] = useState(350); // 3 minutes in seconds
+    const [timerOn, setTimerOn] = useState(true);
 
     let { id } = useParams()
     //initialising reduzx
@@ -55,9 +57,9 @@ function EmailVerify() {
             return
         }
         //navigation on sucessful api call to next page
-        
+
         //navigate to phone number set-up
-        
+
 
     }
 
@@ -76,10 +78,28 @@ function EmailVerify() {
 
 
 
+  
+    useEffect(() => {
+        const interval = setInterval(() => {
+          if (timerOn && time > 0) {
+            setTime(prevTime => prevTime - 1);
+          }
+        }, 1000);
+    
+        return () => clearInterval(interval);
+      }, [timerOn, time]);
+    
+      const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      };
+
+
     return (<>
 
-        
-        
+
+
 
         {isLoading && <LoadingModal />}
         {isError && <Modal content={isErrorInfo} closeModal={closeModal} />}
@@ -93,20 +113,29 @@ function EmailVerify() {
 
                 <p className={styles.verifyParagraph}>We sent a verification email to <span> {id}</span>. Click the link inside to get started!</p>
 
-                <form onSubmit={(e) => {
-                    e.preventDefault()
-                    submitHandler()
-
-                }}>
-                    <SubmitBtn text='Email didnt arrive ?' style={{ borderRadius: '8px', marginBottom: '20px', marginBottom: '15px', marginTop: '15px' }} />
-
-                </form>
-
-            </div>
 
 
+                <p className={styles.verifyParagraph} style={{color:'green'}}>Arrive in  {formatTime(time)} </p>
+
+                {/*<button onClick={() => setTimerOn(!timerOn)}>
+                    {timerOn ? 'Pause' : 'Start'}
+                </button>*/}
+            
+
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                submitHandler()
+
+            }}>
+                <SubmitBtn text='Email didnt arrive ?' style={{ borderRadius: '8px', marginBottom: '20px', marginBottom: '15px', marginTop: '15px' }} />
+
+            </form>
 
         </div>
+
+
+
+    </div >
 
 
 
